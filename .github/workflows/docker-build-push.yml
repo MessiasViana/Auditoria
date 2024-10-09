@@ -30,7 +30,7 @@ jobs:
         run: echo "${{ secrets.DOCKER_HUB_TOKEN }}" | docker login -u "${{ secrets.DOCKER_HUB_USERNAME }}" --password-stdin
 
       - name: Build Docker image
-        run: docker build -t auditoria-app:latest .
+        run: docker build -t messiasviana/auditoria-app:latest .
 
       - name: Push Docker image
-        run: docker push auditoria-app:latest
+        run: docker push messiasviana/auditoria-app:latest

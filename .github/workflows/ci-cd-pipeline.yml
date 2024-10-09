@@ -39,8 +39,6 @@ jobs:
       - name: Deploy to Staging
         run: |
           echo "Deploying to Staging"
-          # Aqui você pode incluir comandos para realizar o deployment no ambiente staging,
-          # como por exemplo chamar um script de deploy ou interagir com seu servidor de staging.
 
   deploy-production:
     runs-on: ubuntu-latest
@@ -51,4 +49,3 @@ jobs:
       - name: Deploy to Production
         run: |
           echo "Deploying to Production"
-          # Aqui você pode incluir comandos para realizar o deployment no ambiente de produção.

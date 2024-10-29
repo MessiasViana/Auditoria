@@ -8,12 +8,14 @@ Este projeto é uma aplicação Spring Boot que foi configurada para rodar em um
   
 #### Executando o Projeto pelo código-fonte
 1. **Clone o repositório**:
-`git clone https://github.com/MessiasViana/Auditoria.git
-Navegue até o diretório do projeto:
+`git clone https://github.com/MessiasViana/Auditoria.git`
+2. Navegue até o diretório do projeto:
 `cd Auditoria`
-2. **Construir a imagem Docker**:
+3. **Dê um build no projeto**:
+`mvn clean install`
+5. **Construir a imagem Docker**:
 `docker build -t messiasviana/auditoria-app:latest .`
-3. **Executar a imagem Docker**:
+6. **Executar a imagem Docker**:
 `docker run -d -p 8080:8080 messiasviana/auditoria-app:latest`
 A aplicação estará acessível em `http://localhost:8080`.
 

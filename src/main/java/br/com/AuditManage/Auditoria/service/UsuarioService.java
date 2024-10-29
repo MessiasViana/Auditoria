@@ -17,6 +17,10 @@ public class UsuarioService {
     private UsuarioRepository usuarioRepository;
 
     public Usuario criarUsuario(Usuario usuario) {
+    	if (usuario.getNome() == null || usuario.getEmail() == null || usuario.getSenha() == null) {
+            throw new IllegalArgumentException("Erro no cadastro do usuário");
+        }
+    	
         if (!emailJaCadastrado(usuario.getEmail())) {
             usuario.setDataDeCadastro(LocalDateTime.now());
             return usuarioRepository.save(usuario);

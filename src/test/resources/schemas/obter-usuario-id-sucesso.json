@@ -1,0 +1,65 @@
+{
+  "definitions": {},
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://example.com/object1730380668.json",
+  "title": "Root",
+  "type": "object",
+  "required": [
+    "id",
+    "nome",
+    "email",
+    "senha",
+    "dataDeCadastro"
+  ],
+  "properties": {
+    "id": {
+      "$id": "#root/id",
+      "title": "Id",
+      "type": "integer",
+      "examples": [
+        79
+      ],
+      "default": 0
+    },
+    "nome": {
+      "$id": "#root/nome",
+      "title": "Nome",
+      "type": "string",
+      "default": "",
+      "examples": [
+        "João Silva"
+      ],
+      "pattern": "^.*$"
+    },
+    "email": {
+      "$id": "#root/email",
+      "title": "Email",
+      "type": "string",
+      "default": "",
+      "examples": [
+        "aaaabbbb@email.com"
+      ],
+      "pattern": "^.*$"
+    },
+    "senha": {
+      "$id": "#root/senha",
+      "title": "Senha",
+      "type": "string",
+      "default": "",
+      "examples": [
+        "senha123"
+      ],
+      "pattern": "^.*$"
+    },
+    "dataDeCadastro": {
+      "$id": "#root/dataDeCadastro",
+      "title": "Datadecadastro",
+      "type": "string",
+      "default": "",
+      "examples": [
+        "2024-10-31T10:17:13.304485"
+      ],
+      "pattern": "^.*$"
+    }
+  }
+}

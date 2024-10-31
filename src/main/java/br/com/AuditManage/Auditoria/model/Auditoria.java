@@ -15,7 +15,7 @@ public class Auditoria {
 
     private String descricao;
 
-    private LocalDateTime dataAgendada;
+    private String dataAgendada;
 
     private boolean concluida;
 
@@ -36,11 +36,11 @@ public class Auditoria {
         this.descricao = descricao;
     }
 
-    public LocalDateTime getDataAgendada() {
+    public String getDataAgendada() {
         return dataAgendada;
     }
 
-    public void setDataAgendada(LocalDateTime dataAgendada) {
+    public void setDataAgendada(String dataAgendada) {
         this.dataAgendada = dataAgendada;
     }
 

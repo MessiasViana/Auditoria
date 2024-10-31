@@ -10,5 +10,5 @@ import br.com.AuditManage.Auditoria.model.Auditoria;
 
 @Repository
 public interface AuditoriaRepository extends JpaRepository<Auditoria, Long>{
-	Optional<Auditoria> findByDataAgendada(LocalDateTime dataAgendada);
+	Optional<Auditoria> findByDataAgendada(String dataAgendada);
 }

@@ -1,55 +1,67 @@
 package steps;
 
+import io.cucumber.datatable.DataTable;
 import io.cucumber.java.pt.Dado;
+import io.cucumber.java.pt.E;
+import io.cucumber.java.pt.Entao;
 import io.cucumber.java.pt.Quando;
+import model.ErrorMessageModel;
+import org.junit.Assert;
 import services.CadastroUsuarioService;
-import io.cucumber.java.pt.Então;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.List;
 import java.util.Map;
-
+import java.util.UUID;
 
 public class CadastroUsuarioSteps {
-
-
     CadastroUsuarioService cadastroUsuarioService = new CadastroUsuarioService();
-    
 
     @Dado("que eu tenha os seguintes dados do usuário:")
-    public void que_eu_tenha_os_seguintes_dados_do_usuario(List<Map<String, String>> rows) {
-    	for(Map<String, String> columns : rows) {
-    		cadastroUsuarioService.setFieldsUser(columns.get("campo"),  columns.get("valor"));
+    public void queEuTenhaOsSeguintesDadosDoUsuario(List<Map<String, String>> rows) {
+        for(Map<String, String> columns : rows) {
+            String campo = columns.get("campo");
+            String valor = columns.get("valor");
+
+            // Gerar um email aleatório se o campo for "email"
+            if ("email".equals(campo)) {
+                valor = "usuario_" + UUID.randomUUID().toString() + "@exemplo.com";
+            }
+
+            cadastroUsuarioService.setFieldsDelivery(campo, valor);
         }
     }
-    
-    @Dado("que eu tenha os seguintes dados inválidos do usuário:")
-    public void que_eu_tenha_os_seguintes_dados_invalidos_do_usuario(List<Map<String, String>> rows) {
-    	for(Map<String, String> columns : rows) {
-    		cadastroUsuarioService.setFieldsUser(columns.get("campo"),  columns.get("valor"));
+
+
+    @Dado("que já exista um usuário cadastrado com o email:")
+    public void queJaExistaUmUsuarioCadastradoComOEmail(List<Map<String, String>> rows) {
+        for(Map<String, String> columns : rows) {
+            cadastroUsuarioService.setFieldsDelivery(columns.get("campo"),  columns.get("valor"));
         }
+
+        cadastroUsuarioService.createDelivery("/api/usuarios");
     }
 
-    @Quando("eu enviar uma requisição POST para o endpoint {string}")
-    public void eu_enviar_uma_requisição_post_para_o_endpoint(String endPoint) {
-    	cadastroUsuarioService.createDelivery(endPoint);
+    @Quando("eu enviar a requisição para o endpoint {string} de cadastro de usuários")
+    public void euEnviarARequisicaoParaOEndpointDeCadastroDeUsuarios(String endPoint) {
+        cadastroUsuarioService.createDelivery(endPoint);
     }
 
-    @Então("o status code da resposta deve ser {int}")
-    public void o_status_code_da_resposta_deve_ser(int statusCode) {
-        assertEquals(statusCode, cadastroUsuarioService.response.statusCode());
+    @Entao("o status code da resposta deve ser {int}")
+    public void oStatusCodeDaRespostaDeveSer(Integer expectedStatusCode) {
+        int actualStatusCode = cadastroUsuarioService.response.getStatusCode();
+        Assert.assertEquals(expectedStatusCode.intValue(), actualStatusCode);
     }
 
-    @Então("o corpo da resposta deve conter a mensagem {string}")
-    public void o_corpo_da_resposta_deve_conter_a_mensagem(String mensagem) {
-        assertTrue(cadastroUsuarioService.response.getBody().asString().contains(mensagem));
+    @Entao("o status code da resposta do erro deve ser {int}")
+    public void oStatusCodeDaRespostaDoErroDeveSer(Integer expectedStatusCode) {
+        int actualStatusCode = cadastroUsuarioService.response.getStatusCode();
+        Assert.assertEquals(expectedStatusCode.intValue(), actualStatusCode);
     }
 
-    @Então("o corpo da resposta deve conter a mensagem de erro")
-    public void o_corpo_da_resposta_deve_conter_a_mensagem_de_erro() {
-    	String mensagemErro = "Erro no cadastro do usuário";
-        String responseBody = cadastroUsuarioService.response.getBody().asString();
-        assertTrue(responseBody.contains(mensagemErro), "A mensagem de erro esperada não foi encontrada no corpo da resposta.");
+    @E("o corpo de resposta de erro da api de cadastro deve retornar {string}")
+    public void oCorpoDeRespostaDeErroDaApiDeCadastroDeveRetornar(String message) {
+        ErrorMessageModel errorMessageModel = cadastroUsuarioService.gson.fromJson(
+                cadastroUsuarioService.response.jsonPath().prettify(), ErrorMessageModel.class);
+        Assert.assertEquals(message, errorMessageModel.getMessage());
     }
 }

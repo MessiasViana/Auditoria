@@ -1,6 +1,8 @@
 package br.com.AuditManage.Auditoria.controller;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,7 +32,9 @@ public class UsuarioController {
             Usuario criado = usuarioService.criarUsuario(usuario);
             return ResponseEntity.ok("Usuário criado com sucesso com ID: " + criado.getId());
         } catch (IllegalArgumentException e) {
-            return ResponseEntity.badRequest().body(e.getMessage());
+            Map<String, String> errorResponse = new HashMap<>();
+            errorResponse.put("message", e.getMessage());
+            return ResponseEntity.badRequest().body(errorResponse);
         }
     }
 
@@ -47,7 +51,9 @@ public class UsuarioController {
         if(usuario.isPresent()) {
             return ResponseEntity.ok(usuario);
         } else {
-            return ResponseEntity.status(404).body("Usuário não encontrado com ID: " + id);
+            Map<String, String> errorResponse = new HashMap<>();
+            errorResponse.put("message", "Usuário não encontrado.");
+            return ResponseEntity.status(404).body(errorResponse);
         }
     }
 

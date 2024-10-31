@@ -1,6 +1,8 @@
 package br.com.AuditManage.Auditoria.controller;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,7 +32,9 @@ public class AuditoriaController {
             Auditoria criada = auditoriaService.criarAuditoria(auditoria);
             return ResponseEntity.ok("Auditoria criada com sucesso com ID: " + criada.getId());
         } catch (IllegalArgumentException e) {
-            return ResponseEntity.badRequest().body(e.getMessage());
+            Map<String, String> errorResponse = new HashMap<>();
+            errorResponse.put("message", e.getMessage());
+            return ResponseEntity.badRequest().body(errorResponse);
         }
     }
 
@@ -69,7 +73,9 @@ public class AuditoriaController {
             Auditoria atualizada = auditoriaService.atualizarAuditoria(id, auditoria);
             return ResponseEntity.ok(atualizada);
         } else {
-            return ResponseEntity.status(404).body("Auditoria não encontrada com ID: " + id);
+            Map<String, String> errorResponse = new HashMap<>();
+            errorResponse.put("message", "Auditoria não encontrada.");
+            return ResponseEntity.status(404).body(errorResponse);
         }
     }
 }

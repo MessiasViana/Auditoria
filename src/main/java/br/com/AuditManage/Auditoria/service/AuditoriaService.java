@@ -24,7 +24,7 @@ public class AuditoriaService {
         }
     }
 
-    private boolean auditoriaJaMarcada(LocalDateTime dataAgendada) {
+    private boolean auditoriaJaMarcada(String dataAgendada) {
         return auditoriaRepository.findByDataAgendada(dataAgendada).isPresent();
     }
 

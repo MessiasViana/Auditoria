@@ -1,0 +1,53 @@
+{
+  "definitions": {},
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://example.com/object1730336454.json",
+  "title": "Root",
+  "type": "object",
+  "required": [
+    "id",
+    "descricao",
+    "dataAgendada",
+    "concluida"
+  ],
+  "properties": {
+    "id": {
+      "$id": "#root/id",
+      "title": "Id",
+      "type": "integer",
+      "examples": [
+        8
+      ],
+      "default": 0
+    },
+    "descricao": {
+      "$id": "#root/descricao",
+      "title": "Descricao",
+      "type": "string",
+      "default": "",
+      "examples": [
+        "Auditoria de sla"
+      ],
+      "pattern": "^.*$"
+    },
+    "dataAgendada": {
+      "$id": "#root/dataAgendada",
+      "title": "Dataagendada",
+      "type": "string",
+      "default": "",
+      "examples": [
+        "2024-06-01T10:00:00"
+      ],
+      "pattern": "^.*$"
+    },
+    "concluida": {
+      "$id": "#root/concluida",
+      "title": "Concluida",
+      "type": "boolean",
+      "examples": [
+        true
+      ],
+      "default": true
+    }
+  }
+}

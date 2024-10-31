@@ -13,13 +13,10 @@ import io.restassured.response.Response;
 import model.AuditoriaModel;
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.json.JSONTokener;
 
 import java.io.IOException;
-import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.time.LocalDateTime;
 import java.util.Set;
 
 import static io.restassured.RestAssured.given;

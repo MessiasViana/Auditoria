@@ -9,7 +9,6 @@ import com.networknt.schema.JsonSchemaFactory;
 import com.networknt.schema.SpecVersion;
 import com.networknt.schema.ValidationMessage;
 import io.restassured.RestAssured;
-import io.restassured.http.ContentType;
 import io.restassured.response.Response;
 import model.UsuarioModel;
 import org.json.JSONException;
@@ -20,7 +19,6 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.Set;
 
-import static io.restassured.RestAssured.given;
 
 public class ObterUsuariosPorIdService {
     final UsuarioModel usuarioModel = new UsuarioModel();

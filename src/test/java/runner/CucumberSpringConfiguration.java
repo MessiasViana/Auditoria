@@ -7,6 +7,8 @@ import org.springframework.test.context.TestPropertySource;
 
 @CucumberContextConfiguration
 @TestPropertySource(properties = "server.port=8080")
-@SpringBootTest(classes = {AuditoriaApplication.class,CucumberTests.class}, webEnvironment = SpringBootTest.WebEnvironment.DEFINED_PORT)
+@SpringBootTest(classes =
+        {AuditoriaApplication.class,CucumberTests.class},
+        webEnvironment = SpringBootTest.WebEnvironment.DEFINED_PORT)
 public class CucumberSpringConfiguration {
 }
